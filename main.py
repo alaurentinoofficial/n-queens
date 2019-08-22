@@ -15,25 +15,31 @@ def test_queen(row, col, queens):
 def n_queens(size=(8, 8), queens=[], row=0):
     rows_size, cols_size = size
 
+    # Check if gets in the maximum cases
     if rows_size == row:
         return queens
     
+    # Save the max length
     max_lenght = []
     
+    # Pass by each one column
     for col in range(cols_size):
+        # Check if the actual position is valid
         if test_queen(row, col, queens):
+            # Add the new queen
             queens.append(col)
 
-            if len(queens) > len(max_lenght):
-                max_lenght = queens
-
+            # Calls the next layer
             forward = n_queens(size, queens[:], row+1)
 
+            # Check if the next layer results is grander than actual
             if len(forward) > len(max_lenght):
                 max_lenght = forward
 
+            # Remove this queen
             queens = queens[:-1]
     
+    # Return the max length
     return max_lenght
                 
 
